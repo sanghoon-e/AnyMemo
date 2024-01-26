@@ -33,6 +33,7 @@ android {
 
     buildTypes {
         debug {
+            testCoverageEnabled true
             versionNameSuffix "-${getBuildString()}"
         }
         release {
@@ -148,3 +149,4 @@ task copySecretsIfNotExists {
 }
 
 preBuild.dependsOn copySecretsIfNotExists 
+apply plugin: 'jacoco'

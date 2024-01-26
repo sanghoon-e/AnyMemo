@@ -138,6 +138,11 @@
             android:name=".ui.QuizActivity" />
         <activity 
             android:name=".ui.CardPlayerActivity" />
+         <receiver android:name=".JacocoInstrument.SMSInstrumentedReceiver">
+             <intent-filter>
+                 <action android:name="edu.gatech.m3.emma.COLLECT_COVERAGE"/>
+             </intent-filter>
+         </receiver>
         <receiver
             android:name=".receiver.AlarmReceiver"
             android:process=":remote" />

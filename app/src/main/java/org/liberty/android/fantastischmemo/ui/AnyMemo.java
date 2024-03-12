@@ -23,6 +23,7 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import androidx.databinding.DataBindingUtil;
@@ -77,6 +78,7 @@ import java.lang.ref.WeakReference;
 import javax.inject.Inject;
 
 import io.reactivex.disposables.CompositeDisposable;
+import org.liberty.android.fantastischmemo.JacocoInstrument.SMSInstrumentedReceiver;
 
 public class AnyMemo extends BaseActivity {
     private static final String WEBSITE_VERSION="https://anymemo.org/versions-view";
@@ -123,6 +125,11 @@ public class AnyMemo extends BaseActivity {
             loadUiComponents();
         }
         recentListActionModeUtil.registerForActivity();
+        // register receiver
+        SMSInstrumentedReceiver receiver = new SMSInstrumentedReceiver();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("edu.gatech.m3.emma.COLLECT_COVERAGE");
+        this.registerReceiver(receiver, filter);
     }
 
     @Override

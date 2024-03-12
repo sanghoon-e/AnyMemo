@@ -1,4 +1,6 @@
 package org.liberty.android.fantastischmemo.JacocoInstrument;
+
+
 import android.app.Instrumentation;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,10 +26,8 @@ public class JacocoInstrumentation extends Instrumentation implements FinishList
         Log.d(TAG, "onCreate(" + arguments + ")");
         super.onCreate(arguments);
 
-        if(arguments != null) {
-            mCoverage = getBooleanArgument(arguments, "coverage");
-            mCoverageFilePath = arguments.getString("coverageFile");
-        }
+        mCoverage = getBooleanArgument(arguments, "coverage");
+        mCoverageFilePath = arguments.getString("coverageFile");
         start();
     }
 
@@ -57,7 +57,7 @@ public class JacocoInstrumentation extends Instrumentation implements FinishList
             //https://www.jacoco.org/jacoco/trunk/doc/api/index.html
             //reset - if true the current execution data is cleared afterwards
             out.write((byte[]) agent.getClass().getMethod("getExecutionData", boolean.class)
-                    .invoke(agent, true));
+                    .invoke(agent, false));
         } catch (Exception e) {
             Log.d(TAG, e.toString(), e);
         } finally {
